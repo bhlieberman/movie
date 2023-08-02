@@ -10,7 +10,7 @@
 
 (deftype View [^{:mutable true} el]
   e/IEvent
-  (on [this e] (listen this e (fn [_] (js/console.log "listening to event"))))
+  (on [this e] (listen (.-el this) e (fn [_] (js/console.log "listening to event"))))
   IRenderable
   (-render [this el]
     (let [div (d/create-dom)
