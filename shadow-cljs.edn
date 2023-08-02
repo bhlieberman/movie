@@ -19,4 +19,5 @@
                    :view {:entries [movie.view.core]
                           :depends-on #{:common}}
                    :controller {:entries [movie.controller.core]
-                                :depends-on #{:common}}}}}}
+                                :depends-on #{:common}
+                                :exports {fetchStorage movie.controller.local/fetch}}}}}}
