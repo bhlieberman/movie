@@ -4,20 +4,24 @@
   "src/main"
   "src/test"]
 
- :dev-http {8080 "public"}
+ :dev-http {8080 "public"
+            3531 "public/cljs"}
 
  :dependencies
  []
 
  :builds
- {:dev {:target :esm
-         :output-dir "public/js"
-         :asset-path "js"
-         :modules {:common {:entries [movie.common.core]}
-                   :model {:entries [movie.model.core]
-                           :depends-on #{:common}}
-                   :view {:entries [movie.view.core]
-                          :depends-on #{:common}}
-                   :controller {:entries [movie.controller.core]
-                                :depends-on #{:common}
-                                :exports {fetchStorage movie.controller.local/fetch}}}}}}
+ {:dev-esm {:target :esm 
+            :output-dir "public/js" 
+            :asset-path "js" 
+            :modules {:common     {:entries [movie.common.core]
+                                   :exports {onEvent movie.common.event/on}}
+                      :model      {:entries  [movie.model.core]
+                                   :depends-on #{:common}}
+                      :view       {:entries [movie.view.core] 
+                                   :depends-on #{:common} 
+                                   :exports {View          movie.view.core/->View
+                                             createElement movie.view.dom/create-dom}}
+                      :controller {:entries [movie.controller.core]
+                                   :depends-on #{:common}
+                                   :exports {fetchStorage movie.controller.local/fetch}}}}}}

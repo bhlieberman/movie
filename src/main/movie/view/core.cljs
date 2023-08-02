@@ -16,7 +16,7 @@
     (let [div (d/create-dom)
           node (cond 
                  (string? el)
-                 (-> el
+                 (-> "<p>Is this a string literal</p>"
                      Const/from
                      gdom/constHtmlToNode)
                  (= "object" (goog/typeOf el))
