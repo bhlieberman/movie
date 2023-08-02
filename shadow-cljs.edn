@@ -1,0 +1,20 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src/dev"
+  "src/main"
+  "src/test"]
+
+ :dependencies
+ []
+
+ :builds
+ {:dev {:target :esm
+         :output-dir "public/js"
+         :asset-path "js"
+         :modules {:common {:entries [movie.common.core]}
+                   :model {:entries [movie.model.core]
+                           :depends-on #{:common}}
+                   :view {:entries [movie.view.core]
+                          :depends-on #{:common}}
+                   :controller {:entries [movie.controller.core]
+                                :depends-on #{:common}}}}}}
