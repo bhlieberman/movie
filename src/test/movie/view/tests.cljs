@@ -33,5 +33,10 @@
       (e/on v EventType.CLICK)
       (is (fireClickEvent (.-el v))))))
 
-(run-tests)
+(deftest removing-view-element
+  (testing "that removing view element does not touch DOM"
+    (let [v (c/->View (gdom/getElement "highlight-text"))]
+      (c/remove-element v)
+      (is (gdom/getElement "highlight-text")))))
 
+(run-tests)

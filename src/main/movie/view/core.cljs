@@ -2,26 +2,24 @@
   (:require [goog.dom :as gdom]
             [goog.events :refer [listen]]
             [movie.common.event :as e]
-            [movie.view.dom :as d])
-  (:import [goog.string Const]))
+            [movie.view.dom :as d]))
 
 (defprotocol IRenderable
   (-render [this el]))
 
-(deftype View [^{:mutable true} el]
+(defn render-dom [this & els]
+  (-render this els))
+
+(defprotocol IView
+  (remove-element [this])
+  (update-element [this el]))
+
+(deftype View [^{:mutable true} element]
   e/IEvent
-  (on [this e] (listen (.-el this) e (fn [_] (js/console.log "listening to event"))))
+  ;; should having event on single parent DOM element suffice? 
+  (on [this e] (listen (.-element this) e (fn [_] (js/console.log "listening to event"))))
+  IView
+  (remove-element [this] (set! (.-element this) nil))
+  (update-element [this el] (set! (.-element this) el))
   IRenderable
-  (-render [this el]
-    (let [div (d/create-dom)
-          node (cond 
-                 (string? el)
-                 (-> "<p>Is this a string literal</p>"
-                     Const/from
-                     gdom/constHtmlToNode)
-                 (= "object" (goog/typeOf el))
-                 el)]
-      (gdom/appendChild div node)
-      (set! (.-el this) div)
-      (gdom/appendChild (.-body js/document) div)
-      this)))
+  (-render [this _] this))
