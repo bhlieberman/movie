@@ -22,4 +22,5 @@
   (remove-element [this] (set! (.-element this) nil))
   (update-element [this el] (set! (.-element this) el))
   IRenderable
-  (-render [this _] this))
+  (-render [this el] (if el (gdom/appendChild (.-body js/document) el)
+                         (gdom/appendChild (.-body js/document) (.-element this)))))
