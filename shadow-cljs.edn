@@ -2,16 +2,16 @@
 {:source-paths
  ["src/dev"
   "src/main"
-  "src/test"]
+  "src/test"
+  "resources"]
 
- :dev-http {8080 "public"
-            3531 "public/cljs"}
+ :dev-http {8080 "public"}
 
  :dependencies
- []
+ [[com.google.template/soy "2023-07-19"]]
 
  :builds
- {:dev-esm {:target :esm 
+ {:dev-esm {:target :browser 
             :output-dir "public/js" 
             :asset-path "js" 
             :modules {:common     {:entries [movie.common.core]
