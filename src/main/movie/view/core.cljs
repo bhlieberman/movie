@@ -46,4 +46,4 @@
       (gstyle/setStyle element style))))
 
 ;; ok this works, probably can be improved
-(h/compile-template "simple.soy" "examples.simple.helloWorld")
+(comment (h/compile-template "simple.soy" "examples.simple.helloWorld"))
