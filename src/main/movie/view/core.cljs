@@ -5,8 +5,7 @@
             [goog.style :as gstyle]
             [goog.soy :as soy]
             [movie.common.event :as e]
-            [movie.view.html :as h]
-            [movie.view.dom :as d]))
+            [movie.view.html :as h]))
 
 (defprotocol IRenderable
   (-render [this el]))
@@ -46,4 +45,7 @@
       (gstyle/setStyle element style))))
 
 ;; ok this works, probably can be improved
-(comment (h/compile-template "simple.soy" "examples.simple.helloWorld"))
+(comment (h/compile-template "simple.soy" "examples.simple.helloWorld")
+         (let [t (goog/require "examples.simple.helloWorld")]
+           (soy/renderAsElement t))
+         )

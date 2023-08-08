@@ -14,9 +14,10 @@
 (defmacro compile-soy-to-js [template-name]
   (if-not (= "11" (System/getProperty "java.vm.specification.version"))
     (throw (ex-info "This feature only works on Java 11, sorry!" {}))
-    (sh "java" "-jar" "SoyToJsSrcCompiler.jar" "--outputPathFormat" (str template-name ".js") "--srcs" template-name)))
+    (sh "java" "-jar" "resources/SoyToJsSrcCompiler.jar" "--outputPathFormat" (str "/home/bhlieberman/dev/clj/cljs/movie/src/js/movie/view/" template-name ".js") "--srcs" "resources/simple.soy")))
 
-(comment (compile-template "simple.soy" "examples.simple.helloWorld"))
+(comment (compile-template "simple.soy" "examples.simple.helloWorld")
+         (compile-soy-to-js "simple"))
 
 ;; this works but System/exit is called by main and kills the REPL (sigh)
 (comment 
