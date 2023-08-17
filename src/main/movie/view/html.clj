@@ -30,3 +30,6 @@
     (aset args 3 "/home/bhlieberman/dev/clj/cljs/movie/resources/simple.soy")
     (SoyToJsSrcCompiler/main args))
   )
+
+(comment 
+  (System/getProperty "java.class.path"))
